@@ -1,4 +1,3 @@
-
 <?php
 $servername = "localhost";
 $username = "root";
@@ -9,14 +8,12 @@ $password, $db);
 if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $name = $_POST['name'];
 $email = $_POST['email'];
 $subject = $_POST['subject'];
 $message = $_POST['message'];
 $sql = "INSERT INTO detail (fname, emailid, subject, message) VALUES('$name', '$email', '$subject', '$message')"; 
- 
 if ($conn->query($sql) == true) 
 { 
  echo '<script language="javascript">';
@@ -30,26 +27,23 @@ else
  .$conn->error; 
 } 
 $conn->close(); 
-
 }
 ?>
 <html>
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="style.css"/>
 <script language="JavaScript" type="text/javascript" src="badwords.js"></script>
 <script language="javascript" type="text/javascript">
 function Message()
 {
-
 var textbox_val=document.form.message.value;
 if(textbox_val=="")
 {
 alert("Please enter a message");
 return false;
 }
-
 bwords=badwords(textbox_val);
 if(bwords>0)
 {
@@ -66,8 +60,16 @@ font-family:'Georgia', Times New Roman, Times, serif;
 }
 .button3 {background-color: #008CBA;}
 </style>
+<style>
+.regr{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+</style>
 </head>
-<body>
+<body bgcolor="pink">
+<div class="regr">Register Validation Onkeyup - Name,EmailAddress,Subject </div>
 <div class="hero">
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" onsubmit="return Message();" name="form">
 <div class="row">
@@ -80,7 +82,6 @@ font-family:'Georgia', Times New Roman, Times, serif;
 <label for="name">Email Address</label>
 </div>
 </div>
-
 <div class="input-group">
 <input type="text" name="subject" onkeyup="this.value=this.value.replace(/[^A-z 0-9]/g,'');" required>
 <label for="name">Subject</label>
@@ -91,8 +92,6 @@ font-family:'Georgia', Times New Roman, Times, serif;
 </div>
 <button class="button3" type="submit">Submit</button>
 </form>
-
 </div>
 </body>
-
 </html>
